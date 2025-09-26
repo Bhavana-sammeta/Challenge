@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rapido Dashboard</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+    }
+    header {
+      background: #ffcc00;
+      padding: 15px;
+      color: #333;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 60px;
+      width: 220px;
+      height: 100%;
+      background: #222;
+      padding-top: 20px;
+    }
+    .sidebar a {
+      display: block;
+      padding: 12px 20px;
+      color: #fff;
+      text-decoration: none;
+    }
+    .sidebar a:hover {
+      background: #444;
+    }
+    .content {
+      margin-left: 220px;
+      padding: 20px;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      margin: 15px 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .stats {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .stat-box {
+      flex: 1;
+      min-width: 200px;
+      background: #ffcc00;
+      padding: 15px;
+      border-radius: 8px;
+      color: #333;
+      text-align: center;
+      font-weight: bold;
+    }
+    button {
+      padding: 10px 15px;
+      background: #ffcc00;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #e6b800;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Rapido Dashboard
+  </header>
+
+  <div class="sidebar">
+    <a href="#">Home</a>
+    <a href="#">Rides</a>
+    <a href="#">Earnings</a>
+    <a href="#">Drivers</a>
+    <a href="#">Customers</a>
+    <a href="#">Settings</a>
+  </div>
+
+  <div class="content">
+    <h2>Welcome, Admin 👋</h2>
+
+    <div class="stats">
+      <div class="stat-box">Today’s Rides<br><span id="ridesCount">120</span></div>
+      <div class="stat-box">Earnings<br>₹<span id="earningsCount">8500</span></div>
+      <div class="stat-box">Active Drivers<br><span id="driversCount">340</span></div>
+      <div class="stat-box">Customers<br><span id="customersCount">1200</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Recent Activity</h3>
+      <ul id="activityLog">
+        <li>Ride #123 completed by Driver A</li>
+        <li>Ride #124 completed by Driver B</li>
+        <li>New driver registered</li>
+      </ul>
+      <button onclick="addActivity()">Add Random Activity</button>
+    </div>
+  </div>
+
+  <script>
+    function addActivity() {
+      const activities = [
+        "New customer signed up",
+        "Driver completed a ride",
+        "Payment processed",
+        "Driver rating updated",
+        "New driver registered",
+        "Ride cancelled by customer"
+      ];
+      const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+      const log = document.getElementById("activityLog");
+      const li = document.createElement("li");
+      li.textContent = randomActivity;
+      log.prepend(li);
+    }
+
+    // Auto update ride stats
+    setInterval(() => {
+      document.getElementById("ridesCount").textContent =
+        parseInt(document.getElementById("ridesCount").textContent) + 1;
+      document.getElementById("earningsCount").textContent =
+        parseInt(document.getElementById("earningsCount").textContent) + 50;
+    }, 5000);
+  </script>
+</body>
+</html>
