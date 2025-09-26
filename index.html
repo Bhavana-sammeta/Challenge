@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fast Foods Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+    body {
+      display: flex;
+      min-height: 100vh;
+      background: #fffdf7;
+    }
+    /* Sidebar */
+    .sidebar {
+      width: 220px;
+      background: #e63946;
+      color: white;
+      padding: 20px;
+    }
+    .sidebar h2 {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    .sidebar ul {
+      list-style: none;
+    }
+    .sidebar ul li {
+      margin: 15px 0;
+    }
+    .sidebar ul li a {
+      color: white;
+      text-decoration: none;
+      font-size: 16px;
+      display: block;
+    }
+    .sidebar ul li a:hover {
+      text-decoration: underline;
+    }
+    /* Main Content */
+    .main {
+      flex: 1;
+      padding: 20px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    .topbar h1 {
+      color: #e63946;
+    }
+    /* Cards */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .card h3 {
+      color: #e63946;
+      margin-bottom: 10px;
+    }
+    /* Chart Box */
+    .chart-box {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin-bottom: 40px;
+    }
+    canvas {
+      width: 100% !important;
+      height: 300px !important;
+    }
+    /* Table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      text-align: center;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    th {
+      background: #e63946;
+      color: white;
+    }
+    tr:hover {
+      background: #ffe5e5;
+    }
+  </style>
+</head>
+<body>
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>🍔 Fast Foods</h2>
+    <ul>
+      <li><a href="#">Dashboard</a></li>
+      <li><a href="#">Orders</a></li>
+      <li><a href="#">Menu</a></li>
+      <li><a href="#">Customers</a></li>
+      <li><a href="#">Reports</a></li>
+    </ul>
+  </div>
+  
+  <!-- Main -->
+  <div class="main">
+    <div class="topbar">
+      <h1>Dashboard</h1>
+      <p>Welcome, Admin 🍟</p>
+    </div>
+    
+    <!-- Cards -->
+    <div class="cards">
+      <div class="card">
+        <h3>Total Sales</h3>
+        <p>₹85,000</p>
+      </div>
+      <div class="card">
+        <h3>Orders</h3>
+        <p>340</p>
+      </div>
+      <div class="card">
+        <h3>Customers</h3>
+        <p>210</p>
+      </div>
+      <div class="card">
+        <h3>Top Item</h3>
+        <p>Burger</p>
+      </div>
+    </div>
+    
+    <!-- Chart -->
+    <div class="chart-box">
+      <h3>Sales Overview</h3>
+      <canvas id="salesChart"></canvas>
+    </div>
+
+    <!-- Table -->
+    <h3>Popular Fast Foods</h3>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Orders</th>
+        <th>Revenue (₹)</th>
+      </tr>
+      <tr>
+        <td>Burger</td>
+        <td>120</td>
+        <td>24,000</td>
+      </tr>
+      <tr>
+        <td>Pizza</td>
+        <td>95</td>
+        <td>28,500</td>
+      </tr>
+      <tr>
+        <td>Fries</td>
+        <td>80</td>
+        <td>12,000</td>
+      </tr>
+      <tr>
+        <td>Sandwich</td>
+        <td>45</td>
+        <td>7,500</td>
+      </tr>
+    </table>
+  </div>
+  
+  <!-- JS for Chart -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Burger', 'Pizza', 'Fries', 'Sandwich', 'Wraps'],
+        datasets: [{
+          label: 'Sales (₹)',
+          data: [24000, 28500, 12000, 7500, 13000],
+          backgroundColor: ['#e63946','#f77f00','#ffb703','#fb8500','#e09f3e']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
